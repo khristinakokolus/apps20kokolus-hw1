@@ -1,6 +1,5 @@
 package ua.edu.ucu.tempseries;
 
-import java.lang.IllegalArgumentException;
 import java.util.InputMismatchException;
 
 /**
@@ -13,6 +12,8 @@ import java.util.InputMismatchException;
  */
 
 public class TemperatureSeriesAnalysis {
+    private final int capacity = 50;
+    private final int maxMinValue = -273;
     private double[] temperatureSeries;
     private int amountOfTemperatures;
 
@@ -20,8 +21,9 @@ public class TemperatureSeriesAnalysis {
      * Creates a new default object of the
      * TemperatureSeriesAnalysis class.
      */
+
     public TemperatureSeriesAnalysis() {
-        this.temperatureSeries = new double[50];
+        this.temperatureSeries = new double[capacity];
         this.amountOfTemperatures = 0;
     }
 
@@ -31,12 +33,14 @@ public class TemperatureSeriesAnalysis {
      *
      * @param temperatureSeries series of the temperatures
      */
+
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        for(double temp : temperatureSeries){
-            if (temp < -273) {
+        for (double temp : temperatureSeries) {
+            if (temp < maxMinValue) {
                 this.temperatureSeries = new double[50];
                 this.amountOfTemperatures = 0;
-                throw new InputMismatchException("Wrong temperatures in series!");
+                throw new InputMismatchException("Wrong" +
+                        " temperatures in series!");
             }
         }
         this.temperatureSeries = temperatureSeries;
@@ -48,6 +52,7 @@ public class TemperatureSeriesAnalysis {
      *
      * @return temperature series
      */
+
     public double[] getTemperatureSeries(){
         return temperatureSeries;
     }
@@ -58,15 +63,16 @@ public class TemperatureSeriesAnalysis {
      *
      * @return average value of the temperature series
      */
+
     public double average() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double averageTemp;
         double temperatures = 0;
         int counter = 0;
-        for(double temp : temperatureSeries){
-            if(counter == amountOfTemperatures) {
+        for (double temp : temperatureSeries) {
+            if (counter == amountOfTemperatures) {
                 break;
             }
             temperatures += temp;
@@ -82,15 +88,16 @@ public class TemperatureSeriesAnalysis {
      *
      * @return deviation value of the temperature series
      */
+
     public double deviation() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double deviation;
         double averageTemp = this.average();
         double variance = 0;
         int counter = 0;
-        for(double temp : temperatureSeries){
+        for (double temp : temperatureSeries) {
             if(counter == amountOfTemperatures) {
                 break;
             }
@@ -110,17 +117,18 @@ public class TemperatureSeriesAnalysis {
      * @param value a value we need to find min or max
      * @return min or max value of the temperature series
      */
+
     public double helpfulMinMax(String value){
         double minOrMax = temperatureSeries[0];
         int counter = 0;
-        for(double temp : temperatureSeries){
-            if(counter == amountOfTemperatures){
+        for (double temp : temperatureSeries) {
+            if (counter == amountOfTemperatures) {
                 break;
             }
-            if (temp < minOrMax && value.equals("min")){
+            if (temp < minOrMax && value.equals("min")) {
                 minOrMax = temp;
             }
-            else if(temp > minOrMax && value.equals("max")){
+            else if (temp > minOrMax && value.equals("max")) {
                 minOrMax = temp;
             }
         }
@@ -133,8 +141,9 @@ public class TemperatureSeriesAnalysis {
      *
      * @return min value of the temperature series
      */
+
     public double min() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double min;
@@ -148,6 +157,7 @@ public class TemperatureSeriesAnalysis {
      *
      * @return max value of the temperature series
      */
+
     public double max() {
         if(amountOfTemperatures == 0){
             throw new IllegalArgumentException("TempSeries is empty!");
@@ -163,6 +173,7 @@ public class TemperatureSeriesAnalysis {
      *
      * @return closest value to zero
      */
+
     public double findTempClosestToZero() {
         if(amountOfTemperatures == 0){
             throw new IllegalArgumentException("TempSeries is empty!");
@@ -177,17 +188,19 @@ public class TemperatureSeriesAnalysis {
      * @param tempValue a certain value
      * @return closest value from temperature series to the certain one
      */
+
     public double findTempClosestToValue(double tempValue) {
         if(amountOfTemperatures == 0){
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double closest = temperatureSeries[0];
-        double difference = Double.POSITIVE_INFINITY;;
+        double difference = Double.POSITIVE_INFINITY;
         for(double temp : temperatureSeries){
             double tempDifference = Math.abs(tempValue - temp);
             if(tempDifference <= difference){
                 difference = tempDifference;
-                if(Math.abs(tempValue - temp) == Math.abs(tempValue - closest) && closest > temp){
+                if(Math.abs(tempValue - temp) == Math.abs(tempValue - closest)
+                        && closest > temp){
                 }
                 else{
                     closest = temp;
@@ -207,7 +220,9 @@ public class TemperatureSeriesAnalysis {
      * @param tempValue a certain value
      * @return array with temperature values greater or less than given one
      */
-    public double[] helpfulFindTempsLessGreaterThen(String value, double tempValue){
+
+    public double[] helpfulFindTempsLessGreaterThen(String value,
+                                                    double tempValue){
         int tempSeriesLength = amountOfTemperatures;
         double[] tempSeriesLessOrGreaterThen = new double[tempSeriesLength];
         int counter = 0;
@@ -236,9 +251,11 @@ public class TemperatureSeriesAnalysis {
      * @param tempValue a certain value
      * @return array of temperatures less then given one
      */
+
     public double[] findTempsLessThen(double tempValue) {
         double[] tempSeriesLess;
-        tempSeriesLess = this.helpfulFindTempsLessGreaterThen("less", tempValue);
+        tempSeriesLess = this.helpfulFindTempsLessGreaterThen(
+                "less", tempValue);
         return tempSeriesLess;
     }
 
@@ -249,9 +266,11 @@ public class TemperatureSeriesAnalysis {
      * @param tempValue a certain value
      * @return array of temperatures greater then given one
      */
+
     public double[] findTempsGreaterThen(double tempValue) {
         double[] tempSeriesGreater;
-        tempSeriesGreater = this.helpfulFindTempsLessGreaterThen("greater", tempValue);
+        tempSeriesGreater = this.helpfulFindTempsLessGreaterThen(
+                "greater", tempValue);
         return tempSeriesGreater;
     }
 
@@ -261,6 +280,7 @@ public class TemperatureSeriesAnalysis {
      *
      * @return summary statistics of the analysis
      */
+
     public TempSummaryStatistics summaryStatistics() {
         if(amountOfTemperatures == 0){
             throw new IllegalArgumentException("TempSeries is empty!");
@@ -278,10 +298,12 @@ public class TemperatureSeriesAnalysis {
      *
      * @return the total sum of the temperatures in the series.
      */
+
     public int addTemps(double... temps) {
         for(double temp : temps){
-            if (temp < -273) {
-                throw new InputMismatchException("Wrong temperatures in series!");
+            if (temp < maxMinValue) {
+                throw new InputMismatchException("Wrong" +
+                        " temperatures in series!");
             }
         }
         int totalAmount;
@@ -290,7 +312,8 @@ public class TemperatureSeriesAnalysis {
         int difference = temperatureSeries.length - amountOfTemperatures;
         if (difference < amountTemps){
             double[] copy = new double[2*temperatureSeries.length];
-            System.arraycopy(temperatureSeries,0, copy, 0, temperatureSeries.length);
+            System.arraycopy(temperatureSeries,0, copy,
+                    0, temperatureSeries.length);
             temperatureSeries = copy;
         }
         for(double temp : temps){

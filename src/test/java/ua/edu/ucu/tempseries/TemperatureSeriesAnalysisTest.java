@@ -13,6 +13,7 @@ import java.util.InputMismatchException;
  * @author  Khrystyna Kokolus
  * @version 1.0
  */
+
 public class TemperatureSeriesAnalysisTest {
 
     private TemperatureSeriesAnalysis tempSeriesWithOneElement;
@@ -25,6 +26,7 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Initialising needed variables.
      */
+
     @Before
     public void setUp(){
         double[] temperatureSeriesOne = {-1.0};
@@ -33,17 +35,24 @@ public class TemperatureSeriesAnalysisTest {
         double[] temperatureSeriesNormal = {3.0, -5.0, 1.0, 5.0};
         double[] temperatureSeriesSecondNormal = {25.0, 30.0};
         double[] temperatureSeriesOpposite = {10.0, -1.0, 1.0, 12.0, 25.0, -10.0};
-        this.tempSeriesWithOneElement = new TemperatureSeriesAnalysis(temperatureSeriesOne);
-        this.tempSeriesEmpty = new TemperatureSeriesAnalysis(temperatureSeriesEmpty);
-        this.tempSeriesSameElements = new TemperatureSeriesAnalysis(temperatureSeriesSameElements);
-        this.tempSeriesNormal = new TemperatureSeriesAnalysis(temperatureSeriesNormal);
-        this.tempSeriesSecondNormal = new TemperatureSeriesAnalysis(temperatureSeriesSecondNormal);
-        this.tempSeriesOppositeValues = new TemperatureSeriesAnalysis(temperatureSeriesOpposite);
+        this.tempSeriesWithOneElement = new TemperatureSeriesAnalysis(
+                temperatureSeriesOne);
+        this.tempSeriesEmpty = new TemperatureSeriesAnalysis(
+                temperatureSeriesEmpty);
+        this.tempSeriesSameElements = new TemperatureSeriesAnalysis(
+                temperatureSeriesSameElements);
+        this.tempSeriesNormal = new TemperatureSeriesAnalysis(
+                temperatureSeriesNormal);
+        this.tempSeriesSecondNormal = new TemperatureSeriesAnalysis(
+                temperatureSeriesSecondNormal);
+        this.tempSeriesOppositeValues = new TemperatureSeriesAnalysis(
+                temperatureSeriesOpposite);
     }
 
     /**
      * Tests for average method.
      */
+
     @Test
     public void testAverageWithOneElementArray() {
         double expResult = -1.0;
@@ -55,7 +64,6 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAverageWithEmptyArray() {
-
         // expect exception here
         tempSeriesEmpty.average();
     }
@@ -79,6 +87,7 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for deviation method.
      */
+
     @Test
     public void testDeviationWithOneElementArray() {
         double expResult = 0.0;
@@ -112,6 +121,7 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for min method.
      */
+
     @Test
     public void testMinWithOneElementArray() {
         double expResult = -1.0;
@@ -151,14 +161,12 @@ public class TemperatureSeriesAnalysisTest {
         double expResult = -1.0;
         double actualResult = tempSeriesWithOneElement.max();
 
-
         assertEquals(expResult, actualResult, 0.00001);
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void testMaxWithEmptyArray() {
-        double[] temperatureSeries = {};
         // expect exception here
         tempSeriesEmpty.max();
     }
@@ -183,6 +191,7 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for findTempClosestToZero method.
      */
+
     @Test
     public void testFindTempClosestToZeroElementArray() {
         double expResult = -1.0;
@@ -225,10 +234,12 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for findTempClosestToValue method.
      */
+
     @Test
     public void testFindTempClosestToValueElementArray() {
         double expResult = -1.0;
-        double actualResult = tempSeriesWithOneElement.findTempClosestToValue(2.0);
+        double actualResult = tempSeriesWithOneElement.findTempClosestToValue(
+                2.0);
 
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -242,7 +253,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempClosestToValueWithSameTemperatures() {
         double expResult = 25.0;
-        double actualResult = tempSeriesSameElements.findTempClosestToValue(100.0);
+        double actualResult = tempSeriesSameElements.findTempClosestToValue(
+                100.0);
 
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -250,7 +262,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempClosestToValueWithSameDistanceValuesOppositeSigns(){
         double expResult = 10.0;
-        double actualResult = tempSeriesOppositeValues.findTempClosestToValue(10.5);
+        double actualResult = tempSeriesOppositeValues.findTempClosestToValue(
+                10.5);
 
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -258,7 +271,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempClosestToValue() {
         double expResult = 5.0;
-        double actualResult = tempSeriesNormal.findTempClosestToValue(100.0);
+        double actualResult = tempSeriesNormal.findTempClosestToValue(
+                100.0);
 
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -266,10 +280,12 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for findTempsLessThen method.
      */
+
     @Test
     public void testFindTempsLessThenElementArray() {
         double[] expResult = {-1.0};
-        double[] actualResult = tempSeriesWithOneElement.findTempsLessThen(2.0);
+        double[] actualResult = tempSeriesWithOneElement.findTempsLessThen(
+                2.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -278,7 +294,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsLessThenWithSameTemperatures() {
         double[] expResult = {25.0, 25.0, 25.0};
-        double[] actualResult = tempSeriesSameElements.findTempsLessThen(100.0);
+        double[] actualResult = tempSeriesSameElements.findTempsLessThen(
+                100.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -286,7 +303,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsLessThenEmpty() {
         double[] expResult = {0.0, 0.0, 0.0, 0.0};
-        double[] actualResult = tempSeriesNormal.findTempsLessThen(-15.0);
+        double[] actualResult = tempSeriesNormal.findTempsLessThen(
+                -15.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -294,7 +312,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsLessThen() {
         double[] expResult = {-5.0, 1.0, 0.0, 0.0};
-        double[] actualResult = tempSeriesNormal.findTempsLessThen(2.0);
+        double[] actualResult = tempSeriesNormal.findTempsLessThen(
+                2.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -302,10 +321,12 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for findTempsGreaterThen method.
      */
+
     @Test
     public void testFindTempsGreaterThenElementArray() {
         double[] expResult = {-1.0};
-        double[] actualResult = tempSeriesWithOneElement.findTempsGreaterThen(-3.0);
+        double[] actualResult = tempSeriesWithOneElement.findTempsGreaterThen(
+                -3.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -313,7 +334,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsGreaterThenWithSameTemperatures() {
         double[] expResult = {25.0, 25.0, 25.0};
-        double[] actualResult = tempSeriesSameElements.findTempsGreaterThen(15.0);
+        double[] actualResult = tempSeriesSameElements.findTempsGreaterThen(
+                15.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -321,7 +343,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsGreaterThenEmpty() {
         double[] expResult = {0.0, 0.0, 0.0, 0.0};
-        double[] actualResult = tempSeriesNormal.findTempsGreaterThen(15.0);
+        double[] actualResult = tempSeriesNormal.findTempsGreaterThen(
+                15.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -329,7 +352,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempsGreaterThenThen() {
         double[] expResult = {3.0, 5.0, 0.0, 0.0};
-        double[] actualResult = tempSeriesNormal.findTempsGreaterThen(2.0);
+        double[] actualResult = tempSeriesNormal.findTempsGreaterThen(
+                2.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
@@ -337,6 +361,7 @@ public class TemperatureSeriesAnalysisTest {
     /**
      * Tests for SummaryStatistics method.
      */
+
     @Test
     public void testSummaryStatisticsWithOneElementArray() {
         TempSummaryStatistics expResult = new TempSummaryStatistics(-1.0, 0.0,
@@ -344,10 +369,14 @@ public class TemperatureSeriesAnalysisTest {
         TempSummaryStatistics actualResult = tempSeriesWithOneElement.summaryStatistics();
 
 
-        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
-        assertEquals(expResult.getDevTemp(), actualResult.getDevTemp(), 0.00001);
-        assertEquals(expResult.getMinTemp(), actualResult.getMinTemp(), 0.00001);
-        assertEquals(expResult.getMaxTemp(), actualResult.getMaxTemp(), 0.00001);
+        assertEquals(expResult.getAvgTemp(),
+                actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getDevTemp(),
+                actualResult.getDevTemp(), 0.00001);
+        assertEquals(expResult.getMinTemp(),
+                actualResult.getMinTemp(), 0.00001);
+        assertEquals(expResult.getMaxTemp(),
+                actualResult.getMaxTemp(), 0.00001);
 
     }
 
@@ -363,10 +392,14 @@ public class TemperatureSeriesAnalysisTest {
                 25.0, 25.0);
         TempSummaryStatistics actualResult = tempSeriesSameElements.summaryStatistics();
 
-        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
-        assertEquals(expResult.getDevTemp(), actualResult.getDevTemp(), 0.00001);
-        assertEquals(expResult.getMinTemp(), actualResult.getMinTemp(), 0.00001);
-        assertEquals(expResult.getMaxTemp(), actualResult.getMaxTemp(), 0.00001);
+        assertEquals(expResult.getAvgTemp(),
+                actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getDevTemp(),
+                actualResult.getDevTemp(), 0.00001);
+        assertEquals(expResult.getMinTemp(),
+                actualResult.getMinTemp(), 0.00001);
+        assertEquals(expResult.getMaxTemp(),
+                actualResult.getMaxTemp(), 0.00001);
     }
 
 
@@ -376,15 +409,20 @@ public class TemperatureSeriesAnalysisTest {
                 25.0, 30.0);
         TempSummaryStatistics actualResult = tempSeriesSecondNormal.summaryStatistics();
 
-        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
-        assertEquals(expResult.getDevTemp(), actualResult.getDevTemp(), 0.00001);
-        assertEquals(expResult.getMinTemp(), actualResult.getMinTemp(), 0.00001);
-        assertEquals(expResult.getMaxTemp(), actualResult.getMaxTemp(), 0.00001);
+        assertEquals(expResult.getAvgTemp(),
+                actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getDevTemp(),
+                actualResult.getDevTemp(), 0.00001);
+        assertEquals(expResult.getMinTemp(),
+                actualResult.getMinTemp(), 0.00001);
+        assertEquals(expResult.getMaxTemp(),
+                actualResult.getMaxTemp(), 0.00001);
     }
 
     /**
      * Tests for addTemps method.
      */
+
     @Test
     public void testAddTempsWithOneElementArray() {
         double expResult = 2;

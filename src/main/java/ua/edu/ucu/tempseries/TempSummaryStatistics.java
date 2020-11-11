@@ -8,17 +8,18 @@ package ua.edu.ucu.tempseries;
  * @version 1.0
  */
 
-final public class TempSummaryStatistics {
-    final private double avgTemp;
-    final private double devTemp;
-    final private double minTemp;
-    final private double maxTemp;
+public final class TempSummaryStatistics {
+    private final double avgTemp;
+    private final double devTemp;
+    private final double minTemp;
+    private final double maxTemp;
 
     /**
      * Creates a new object of the immutable
      * TempSummaryStatistics class.
      */
-    public TempSummaryStatistics(double avgTemp, double devTemp, double minTemp, double maxTemp) {
+    public TempSummaryStatistics(double avgTemp, double devTemp,
+                                 double minTemp, double maxTemp) {
         this.avgTemp = avgTemp;
         this.devTemp = devTemp;
         this.minTemp = minTemp;
@@ -31,6 +32,7 @@ final public class TempSummaryStatistics {
      *
      * @return average temperature
      */
+
     public double getAvgTemp(){
         return avgTemp;
     }
@@ -41,6 +43,7 @@ final public class TempSummaryStatistics {
      *
      * @return deviation of the temperatures
      */
+
     public double getDevTemp(){
         return devTemp;
     }
@@ -51,6 +54,7 @@ final public class TempSummaryStatistics {
      *
      * @return min temperature
      */
+
     public double getMinTemp(){
         return minTemp;
     }
@@ -61,6 +65,7 @@ final public class TempSummaryStatistics {
      *
      * @return max temperature
      */
+
     public double getMaxTemp(){
         return maxTemp;
     }
