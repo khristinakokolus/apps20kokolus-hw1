@@ -92,7 +92,6 @@ public class TemperatureSeriesAnalysis {
             }
             double tempValue = (temp - averageTemp);
             variance += Math.pow(tempValue, 2);
-
             counter++;
         }
         deviation = Math.sqrt((variance / amountOfTemperatures));
@@ -320,6 +319,7 @@ public class TemperatureSeriesAnalysis {
         TempSummaryStatistics tempSummaryStatistics;
         tempSummaryStatistics = new TempSummaryStatistics(this.average(),
                 this.deviation(), this.min(),this.max());
+
         return tempSummaryStatistics;
     }
 
@@ -344,6 +344,7 @@ public class TemperatureSeriesAnalysis {
             double[] copy = new double[2*temperatureSeries.length];
             System.arraycopy(temperatureSeries,0, copy,
                     0, temperatureSeries.length);
+
             temperatureSeries = copy;
         }
         for (double temp : temps) {
