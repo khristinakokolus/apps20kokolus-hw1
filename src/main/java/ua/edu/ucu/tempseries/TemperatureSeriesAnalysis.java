@@ -90,7 +90,8 @@ public class TemperatureSeriesAnalysis {
             if (counter == amountOfTemperatures) {
                 break;
             }
-            double tempValue = Math.pow((temp - averageTemp), 2);
+            double diff = temp - averageTemp;
+            double tempValue = Math.pow(diff, 2);
             variance += tempValue;
             counter++;
         }
@@ -340,7 +341,7 @@ public class TemperatureSeriesAnalysis {
         if (difference < amountTemps) {
             double[] copy = new double[2*temperatureSeries.length];
             int length = temperatureSeries.length;
-            System.arraycopy(temperatureSeries,0, copy, 0, length);
+            System.arraycopy(temperatureSeries, 0, copy, 0, length);
             temperatureSeries = copy;
         }
         for (double temp : temps) {
