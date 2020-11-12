@@ -39,22 +39,11 @@ public class TemperatureSeriesAnalysis {
             if (temp < maxMinValue) {
                 this.temperatureSeries = new double[capacity];
                 this.amountOfTemperatures = 0;
-                throw new InputMismatchException("Wrong" +
-                        " temperatures in series!");
+                throw new InputMismatchException("Wrong values in series!");
             }
         }
         this.temperatureSeries = temperatureSeries;
         this.amountOfTemperatures = temperatureSeries.length;
-    }
-
-    /**
-     * Returns temperature series;
-     *
-     * @return temperature series
-     */
-
-    public double[] getTemperatureSeries() {
-        return temperatureSeries;
     }
 
     /**
@@ -226,7 +215,7 @@ public class TemperatureSeriesAnalysis {
      * @return amount of elements
      */
 
-    public int countAmountOfElements(String type, double tempValue){
+    public int countAmountOfElements(String type, double tempValue) {
         int temporaryCounter = 0;
         int counterTemp = 0;
         for (double temp : temperatureSeries) {
@@ -256,9 +245,9 @@ public class TemperatureSeriesAnalysis {
      */
 
     public double[] helpfulFindTempsLessGreaterThen (String value,
-                                                    double tempValue){
+                                                     double tempValue) {
         int tempSeriesLength;
-        if (value.equals("less")){
+        if (value.equals("less")) {
             tempSeriesLength = this.countAmountOfElements(
                     "less", tempValue);
         }
@@ -344,8 +333,7 @@ public class TemperatureSeriesAnalysis {
     public int addTemps(double... temps) {
         for (double temp : temps) {
             if (temp < maxMinValue) {
-                throw new InputMismatchException("Wrong" +
-                        " temperatures in series!");
+                throw new InputMismatchException("Wrong values in series!");
             }
         }
         int totalAmount;
