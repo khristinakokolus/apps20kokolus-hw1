@@ -90,6 +90,7 @@ public class TemperatureSeriesAnalysis {
             if (counter == amountOfTemperatures) {
                 break;
             }
+
             variance += Math.pow((temp - averageTemp), 2);
             counter++;
         }
@@ -242,8 +243,7 @@ public class TemperatureSeriesAnalysis {
      * @return array with temperature values greater or less than given one
      */
 
-    public double[] helpfulFindTempsLessGreaterThen (String value,
-                                                     double tempValue) {
+    public double[] helpfulFind(String value, double tempValue) {
 
         int tempSeriesLength;
         if (value.equals("less")) {
@@ -284,8 +284,7 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsLessThen(double tempValue) {
         double[] tempSeriesLess;
-        tempSeriesLess = this.helpfulFindTempsLessGreaterThen(
-                "less", tempValue);
+        tempSeriesLess = this.helpfulFind("less", tempValue);
         return tempSeriesLess;
     }
 
@@ -299,8 +298,7 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsGreaterThen(double tempValue) {
         double[] tempSeriesGreater;
-        tempSeriesGreater = this.helpfulFindTempsLessGreaterThen(
-                "greater", tempValue);
+        tempSeriesGreater = this.helpfulFind("greater", tempValue);
         return tempSeriesGreater;
     }
 
@@ -315,11 +313,11 @@ public class TemperatureSeriesAnalysis {
         if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
-        TempSummaryStatistics tempSummaryStatistics;
-        tempSummaryStatistics = new TempSummaryStatistics(this.average(),
-                this.deviation(), this.min(),this.max());
+        TempSummaryStatistics statistics;
+        statistics = new TempSummaryStatistics(this.average(),
+                this.deviation(), this.min(), this.max());
 
-        return tempSummaryStatistics;
+        return statistics;
     }
 
     /**
@@ -343,7 +341,6 @@ public class TemperatureSeriesAnalysis {
             double[] copy = new double[2*temperatureSeries.length];
             System.arraycopy(temperatureSeries,0, copy,
                     0, temperatureSeries.length);
-
             temperatureSeries = copy;
         }
         for (double temp : temps) {
