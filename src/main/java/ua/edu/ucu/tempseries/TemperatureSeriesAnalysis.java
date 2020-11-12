@@ -92,7 +92,6 @@ public class TemperatureSeriesAnalysis {
             }
             double tempValue = (temp - averageTemp);
             variance += Math.pow(tempValue, 2);
-
             counter++;
         }
         deviation = Math.sqrt((variance / amountOfTemperatures));
