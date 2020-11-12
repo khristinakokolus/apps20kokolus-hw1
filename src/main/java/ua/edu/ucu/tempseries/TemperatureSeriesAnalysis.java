@@ -243,8 +243,7 @@ public class TemperatureSeriesAnalysis {
      * @return array with temperature values greater or less than given one
      */
 
-    public double[] helpfulFindTempsLessGreaterThen (String value,
-                                                     double tempValue) {
+    public double[] helpfulFindTempsLessGreaterThen (String value, double tempValue) {
         int tempSeriesLength;
         if (value.equals("less")) {
             tempSeriesLength = this.countAmountOfElements(
@@ -316,9 +315,8 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         TempSummaryStatistics tempSummaryStatistics;
-        tempSummaryStatistics = new TempSummaryStatistics(this.average(),
+        tempSummaryStatistics = new TempSummaryStatistics(this.average(), 
                 this.deviation(), this.min(),this.max());
-
         return tempSummaryStatistics;
     }
 
