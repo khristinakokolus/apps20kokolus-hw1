@@ -33,7 +33,7 @@ public final class TempSummaryStatistics {
      * @return average temperature
      */
 
-    public double getAvgTemp(){
+    public double getAvgTemp() {
         return avgTemp;
     }
 
@@ -44,7 +44,7 @@ public final class TempSummaryStatistics {
      * @return deviation of the temperatures
      */
 
-    public double getDevTemp(){
+    public double getDevTemp() {
         return devTemp;
     }
 
@@ -55,7 +55,7 @@ public final class TempSummaryStatistics {
      * @return min temperature
      */
 
-    public double getMinTemp(){
+    public double getMinTemp() {
         return minTemp;
     }
 
@@ -66,7 +66,7 @@ public final class TempSummaryStatistics {
      * @return max temperature
      */
 
-    public double getMaxTemp(){
+    public double getMaxTemp() {
         return maxTemp;
     }
 }

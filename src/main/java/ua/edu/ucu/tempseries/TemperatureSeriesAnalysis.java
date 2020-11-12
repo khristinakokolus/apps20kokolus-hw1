@@ -37,7 +37,7 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temp : temperatureSeries) {
             if (temp < maxMinValue) {
-                this.temperatureSeries = new double[50];
+                this.temperatureSeries = new double[capacity];
                 this.amountOfTemperatures = 0;
                 throw new InputMismatchException("Wrong" +
                         " temperatures in series!");
@@ -53,7 +53,7 @@ public class TemperatureSeriesAnalysis {
      * @return temperature series
      */
 
-    public double[] getTemperatureSeries(){
+    public double[] getTemperatureSeries() {
         return temperatureSeries;
     }
 
@@ -98,11 +98,12 @@ public class TemperatureSeriesAnalysis {
         double variance = 0;
         int counter = 0;
         for (double temp : temperatureSeries) {
-            if(counter == amountOfTemperatures) {
+            if (counter == amountOfTemperatures) {
                 break;
             }
             double tempValue = (temp - averageTemp);
             variance += Math.pow(tempValue, 2);
+
             counter++;
         }
         deviation = Math.sqrt((variance / amountOfTemperatures));
@@ -118,7 +119,7 @@ public class TemperatureSeriesAnalysis {
      * @return min or max value of the temperature series
      */
 
-    public double helpfulMinMax(String value){
+    public double helpfulMinMax(String value) {
         double minOrMax = temperatureSeries[0];
         int counter = 0;
         for (double temp : temperatureSeries) {
@@ -159,7 +160,7 @@ public class TemperatureSeriesAnalysis {
      */
 
     public double max() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double max;
@@ -175,7 +176,7 @@ public class TemperatureSeriesAnalysis {
      */
 
     public double findTempClosestToZero() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         return findTempClosestToValue(0);
@@ -190,24 +191,57 @@ public class TemperatureSeriesAnalysis {
      */
 
     public double findTempClosestToValue(double tempValue) {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         double closest = temperatureSeries[0];
         double difference = Double.POSITIVE_INFINITY;
-        for(double temp : temperatureSeries){
+        for (double temp : temperatureSeries) {
             double tempDifference = Math.abs(tempValue - temp);
-            if(tempDifference <= difference){
+            if (tempDifference <= difference) {
                 difference = tempDifference;
-                if(Math.abs(tempValue - temp) == Math.abs(tempValue - closest)
-                        && closest > temp){
+                if (Math.abs(tempValue - temp) == Math.abs(tempValue - closest)
+                        && closest < temp) {
+                    closest = temp;
                 }
-                else{
+                else {
                     closest = temp;
                 }
             }
         }
         return closest;
+    }
+
+    /**
+     * Helpful method for findTempsLessThen and
+     * findTempsGreaterThen functions that
+     * finds and returns the amount of elements
+     * greater or less than certain value.
+     *
+     * It is needed for the capacity of those
+     * arrays.
+     *
+     * @param type a value that characterises the type of array
+     * @param tempValue a certain value
+     * @return amount of elements
+     */
+
+    public int countAmountOfElements(String type, double tempValue){
+        int temporaryCounter = 0;
+        int counterTemp = 0;
+        for (double temp : temperatureSeries) {
+            if (counterTemp == amountOfTemperatures) {
+                break;
+            }
+            if (temp < tempValue && type.equals("less")) {
+                temporaryCounter += 1;
+            }
+            else if (temp >= tempValue && type.equals("greater")) {
+                temporaryCounter += 1;
+            }
+            counterTemp++;
+        }
+        return temporaryCounter;
     }
 
     /**
@@ -221,21 +255,29 @@ public class TemperatureSeriesAnalysis {
      * @return array with temperature values greater or less than given one
      */
 
-    public double[] helpfulFindTempsLessGreaterThen(String value,
+    public double[] helpfulFindTempsLessGreaterThen (String value,
                                                     double tempValue){
-        int tempSeriesLength = amountOfTemperatures;
+        int tempSeriesLength;
+        if (value.equals("less")){
+            tempSeriesLength = this.countAmountOfElements(
+                    "less", tempValue);
+        }
+        else {
+            tempSeriesLength = this.countAmountOfElements(
+                    "greater", tempValue);
+        }
         double[] tempSeriesLessOrGreaterThen = new double[tempSeriesLength];
         int counter = 0;
         int counterTemp = 0;
-        for(double temp : temperatureSeries){
-            if(counterTemp == amountOfTemperatures){
+        for (double temp : temperatureSeries) {
+            if (counterTemp == amountOfTemperatures) {
                 break;
             }
-            if(temp < tempValue && value.equals("less")){
+            if (temp < tempValue && value.equals("less")) {
                 tempSeriesLessOrGreaterThen[counter] = temp;
                 counter += 1;
             }
-            else if(temp >= tempValue && value.equals("greater")){
+            else if (temp >= tempValue && value.equals("greater")) {
                 tempSeriesLessOrGreaterThen[counter] = temp;
                 counter += 1;
             }
@@ -282,7 +324,7 @@ public class TemperatureSeriesAnalysis {
      */
 
     public TempSummaryStatistics summaryStatistics() {
-        if(amountOfTemperatures == 0){
+        if (amountOfTemperatures == 0) {
             throw new IllegalArgumentException("TempSeries is empty!");
         }
         TempSummaryStatistics tempSummaryStatistics;
@@ -300,7 +342,7 @@ public class TemperatureSeriesAnalysis {
      */
 
     public int addTemps(double... temps) {
-        for(double temp : temps){
+        for (double temp : temps) {
             if (temp < maxMinValue) {
                 throw new InputMismatchException("Wrong" +
                         " temperatures in series!");
@@ -310,13 +352,13 @@ public class TemperatureSeriesAnalysis {
         int amountTemps = temps.length;
         int index = amountOfTemperatures;
         int difference = temperatureSeries.length - amountOfTemperatures;
-        if (difference < amountTemps){
+        if (difference < amountTemps) {
             double[] copy = new double[2*temperatureSeries.length];
             System.arraycopy(temperatureSeries,0, copy,
                     0, temperatureSeries.length);
             temperatureSeries = copy;
         }
-        for(double temp : temps){
+        for (double temp : temps) {
             temperatureSeries[index] = temp;
             index++;
         }

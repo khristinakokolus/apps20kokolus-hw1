@@ -302,7 +302,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test
     public void testFindTempsLessThenEmpty() {
-        double[] expResult = {0.0, 0.0, 0.0, 0.0};
+        double[] expResult = {};
         double[] actualResult = tempSeriesNormal.findTempsLessThen(
                 -15.0);
 
@@ -311,7 +311,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test
     public void testFindTempsLessThen() {
-        double[] expResult = {-5.0, 1.0, 0.0, 0.0};
+        double[] expResult = {-5.0, 1.0};
         double[] actualResult = tempSeriesNormal.findTempsLessThen(
                 2.0);
 
@@ -342,7 +342,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test
     public void testFindTempsGreaterThenEmpty() {
-        double[] expResult = {0.0, 0.0, 0.0, 0.0};
+        double[] expResult = {};
         double[] actualResult = tempSeriesNormal.findTempsGreaterThen(
                 15.0);
 
@@ -351,7 +351,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test
     public void testFindTempsGreaterThenThen() {
-        double[] expResult = {3.0, 5.0, 0.0, 0.0};
+        double[] expResult = {3.0, 5.0};
         double[] actualResult = tempSeriesNormal.findTempsGreaterThen(
                 2.0);
 
