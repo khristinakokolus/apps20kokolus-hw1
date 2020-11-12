@@ -91,7 +91,8 @@ public class TemperatureSeriesAnalysis {
                 break;
             }
             double diff = temp - averageTemp;
-            double tempValue = Math.pow(diff, 2);
+            double tempValue = Math.pow(diff,
+                    2);
             variance += tempValue;
             counter++;
         }
